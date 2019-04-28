@@ -1,0 +1,23 @@
+*{
+    padding: 0;
+    margin:0;
+    box-sizing: border-box;
+}
+.token.selector,
+.token.property,
+.token.function,
+.token.punctuation,
+.token.comment{
+    color: rgb(222,222,222);
+}
+body{
+    color: rgb(211,211,211);
+    }
+@keyframes breath{
+    0%{
+        box-shadow: 0 0 10px rgba(255,255,255,1)
+      }
+      100%{
+        box-shadow: 0 0 10px rgba(255,255,255,0.2)
+      }
+} 
