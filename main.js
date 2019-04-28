@@ -63,6 +63,7 @@ var result2 = `
   padding:16px;
       }
   #paper > #content{
+  font-size: 16px;
   background:white;
   width:100%;
   height:100%;
@@ -114,53 +115,53 @@ let markdown = `
 
 `
 var result3 = `
-谢谢观看！`
-writeCode('',result,()=>{createPaper(()=>{writeCode(result,result2,()=>{writeMarkdown(markdown,()=>{writeCode(result + result2,result3)})})})})
+谢谢观看!!!`
+writeCode('', result, () => { createPaper(() => { writeCode(result, result2, () => { writeMarkdown(markdown, () => { writeCode(result + result2, result3) }) }) }) })
 
 
 //功能函数
-function writeCode(preCode,code,fn){
+function writeCode(preCode, code, fn) {
   let codeInPre = document.querySelector('#codeInPre')
   var n = 0
-var timer = setInterval(()=>{
- n += 1
- preCode = preCode || ''
- codeInPre.innerHTML = Prism.highlight(preCode + code.slice(0,n), Prism.languages.css);
- codeInPre.scrollTop = 10000
-  // codeInPre.innerHTML = Prism.highlight(result.slice(0,n), Prism.languages.css);
-  styleTag.innerHTML = preCode + code.slice(0,n)
-  if(n>=code.length){
+  var timer = setInterval(() => {
+    n += 1
+    preCode = preCode || ''
+    codeInPre.innerHTML = Prism.highlight(preCode + code.slice(0, n), Prism.languages.css);
+    codeInPre.scrollTop = 10000
+    // codeInPre.innerHTML = Prism.highlight(result.slice(0,n), Prism.languages.css);
+    styleTag.innerHTML = preCode + code.slice(0, n)
+    if (n >= code.length) {
       window.clearInterval(timer)
       //注意，异步结束才调用函数
       fn.call()
-  }
-  
-},100)
+    }
+
+  }, 100)
 }
 
-function writeMarkdown(markdown,fn){
+function writeMarkdown(markdown, fn) {
   let content = document.querySelector('#content')
   var n = 0
-var timer = setInterval(()=>{
- n += 1
- content.innerHTML =  marked(markdown.slice(0,n));
- content.scrollTop = 10000
-  // codeInPre.innerHTML = Prism.highlight(result.slice(0,n), Prism.languages.css);
-  if(n>=markdown.length){
+  var timer = setInterval(() => {
+    n += 1
+    content.innerHTML = marked(markdown.slice(0, n));
+    content.scrollTop = 10000
+    // codeInPre.innerHTML = Prism.highlight(result.slice(0,n), Prism.languages.css);
+    if (n >= markdown.length) {
       window.clearInterval(timer)
       //注意，异步结束才调用函数
       fn.call()
-  }
-  
-},100)
+    }
+
+  }, 100)
 }
 
-function createPaper(fn){
-  var paper= document.createElement('div')
-    paper.id = 'paper'
-    var content = document.createElement('pre')
-    content.id = 'content'
-    paper.appendChild(content)
-    document.body.appendChild(paper)
-    fn.call()
+function createPaper(fn) {
+  var paper = document.createElement('div')
+  paper.id = 'paper'
+  var content = document.createElement('pre')
+  content.id = 'content'
+  paper.appendChild(content)
+  document.body.appendChild(paper)
+  fn.call()
 }
